@@ -6,6 +6,7 @@ import DashBoard from '../pages/Dashboard';
 import Profile from '../pages/Profile';
 import Customers from '../pages/Customers';
 import New from '../pages/New';
+import Bank from '../pages/Bank';
 
 import Private from './Private';
 
@@ -22,6 +23,8 @@ function RoutesApp(){
       <Route path='/profile' element={<Private> <Profile/> </Private>}/>
 
       <Route path='/customers' element={<Private> <Customers/> </Private>}/>
+
+      <Route path='/bank' element={<Private> <Bank/> </Private>}/>
 
       <Route path='/new' element={<Private> <New/> </Private>}/>
       <Route path='/new/:id' element={<Private> <New/> </Private>}/>

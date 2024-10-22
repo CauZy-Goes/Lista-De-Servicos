@@ -6,14 +6,14 @@ import{useContext, useState,useEffect} from 'react';
 
 import { FiPlus, FiMessageSquare, FiSearch, FiEdit2 } from 'react-icons/fi';
 
-import"./dashboard.css";
+import"./bank.css";
 
 import Header from '../../components/Header';
 import Title from '../../components/Title';
 
 import {format} from 'date-fns';
 
-import { orderBy, limit, where, startAfter, collection, getDocs, query } from 'firebase/firestore';
+import { orderBy,where, limit, startAfter, collection, getDocs, query } from 'firebase/firestore';
 import { db } from '../../services/firebaseConnection';
 
 import Modal from '../../components/Modal';
@@ -29,10 +29,11 @@ export default function DashBoard(){
   const [loadingMore,setLoadingMore] = useState(false);
   const [showPostModal,setShowPostModal] = useState(false);
   const[detail,setDetail] = useState(); 
+  const[filter,setFilter] = useState("");
 
   useEffect(()=>{
     async function loadChamados(){
-      const q = query(listRef,  where('status', 'in', ['Progresso', 'Aberto']) ,orderBy('created','desc'), limit(5));
+      const q = query(listRef, where('status', '==', 'Atendido'), orderBy('created','desc'));
 
       const querySnapshot = await getDocs(q);
        await updateState(querySnapshot);
@@ -80,13 +81,13 @@ export default function DashBoard(){
     setLoadingMore(false);
   }
 
-  async function handleMore(){
-    setLoadingMore(true);
+  // async function handleMore(){
+  //   setLoadingMore(true);
 
-    const q = query(listRef,where('status', 'in', ['Progresso', 'Aberto']), orderBy('created','desc'), startAfter(lastDocs), limit(5));
-    const querySnapshot = await getDocs(q);
-    await updateState(querySnapshot);
-  }
+  //   const q = query(listRef, where('status', '==', 'Atendido'), orderBy('created','desc'), startAfter(lastDocs));
+  //   const querySnapshot = await getDocs(q);
+  //   await updateState(querySnapshot);
+  // }
 
   function toggleModal(item){
     setShowPostModal(!showPostModal)
@@ -114,7 +115,7 @@ export default function DashBoard(){
     <div>
       <Header/>
       <div className='content'>
-        <Title  name="Tickets">
+        <Title  name="Banco De Chamados">
           <FiMessageSquare size={25}/>
         </Title>
 
@@ -124,17 +125,44 @@ export default function DashBoard(){
             chamados.length === 0 ? (
               <div className='container dashboard'>
                 <span> Nenhum chamado encontrado...</span>
-                <Link to='/new' className='new'>
+                {/* <Link to='/new' className='new'>
                   <FiPlus color='#FFF' size={25}/>
                   Novo chamado
-                </Link>
+                </Link> */}
               </div>
             ) : (
               <>
-                <Link to='/new' className='new'>
+                {/* <Link to='/new' className='new'>
                   <FiPlus color='#FFF' size={25}/>
                   Novo chamado
-                </Link>
+                </Link> */}
+
+                <div className="select-container">
+                  <label htmlFor="filtro">Filtro</label>
+                  <select id="filtro" value={filter} onChange={(e) => setFilter(e.target.value)}>
+                  <option value="">Sem Filtro</option>
+                    <option value="Manutenção Ar-Condicionado">Manutenção Ar-Condicionado</option>
+                    <option value="Instalação Ar-Condicionado">Instalação Ar-Condicionado</option>
+                    <option value="Manutenção Computador">Manutenção Computador</option>
+                    <option value="Instalação Computador">Instalação Computador</option>
+                    <option value="Configuração Computador">Configuração Computador</option>
+                    <option value="Manutenção Impressora">Manutenção Impressora</option>
+                    <option value="Instalação Impressora">Instalação Impressora</option>
+                    <option value="Configuração Impressora">Configuração Impressora</option>
+                    <option value="Manutenção Redes">Manutenção Redes</option>
+                    <option value="Instalação Redes">Instalação Redes</option>
+                    <option value="Manutenção Televisão">Manutenção Televisão</option>
+                    <option value="Instalação Televisão">Instalação Televisão</option>
+                    <option value="Configuração Televisão">Configuração Televisão</option>
+                    <option value="Manutenção Telefonia">Manutenção Telefonia</option>
+                    <option value="Instalação Telefonia">Instalação Telefonia</option>
+                    <option value="Manutenção Geladeira">Manutenção Geladeira</option>
+                    <option value="Instalação Geladeira">Instalação Geladeira</option>
+                    <option value="Manutenção Micro-ondas">Manutenção Micro-ondas</option>
+                    <option value="Instalação Micro-ondas">Instalação Micro-ondas</option>
+                  </select>
+                </div>
+
 
                 <table>
                   <thead>
@@ -148,13 +176,13 @@ export default function DashBoard(){
                   </thead>
 
                   <tbody>
-                    {chamados.map((item, index)=>{
+                    {chamados.filter(item => filter === '' || item.assunto === filter).map((item, index)=>{
                       return(
                         <tr key={index} >
                           <td data-label='Cliente'>{item.cliente}</td>
                           <td data-label='Assunto'>{item.assunto}</td>
                           <td data-label='Status'>
-                            <span className='badge' style={{backgroundColor: item.status === 'Aberto' ? '#5cb85c' : '#FF8C00'}}>
+                            <span className='badge' style={{backgroundColor: '#999'}}>
                               {item.status}
                             </span>
                           </td>
@@ -163,9 +191,9 @@ export default function DashBoard(){
                             <button onClick={() => toggleModal(item)} className='action' style={{backgroundColor: '#3583f6'}}>
                               <FiSearch color='#FFF' size={17}/>
                             </button>
-                            <Link to={`/new/${item.id}`} className='action' style={{backgroundColor: '#f6a935'}}>
+                            {/* <Link to={`/new/${item.id}`} className='action' style={{backgroundColor: '#f6a935'}}>
                               <FiEdit2 color='#FFF' size={17}/>
-                            </Link>
+                            </Link> */}
                           </td>
                         </tr>
 
@@ -174,8 +202,8 @@ export default function DashBoard(){
                   </tbody>
                 </table>
 
-                {loadingMore && <h3>Buscando mais chamados...</h3>}
-                {!loadingMore && !isEmply && <button className='btn-more' onClick={handleMore}>Buscar mais</button> }
+                {/* {loadingMore && <h3>Buscando mais chamados...</h3>}
+                {!loadingMore && !isEmply && <button className='btn-more' onClick={handleMore}>Buscar mais</button> } */}
                </>
             )
           }

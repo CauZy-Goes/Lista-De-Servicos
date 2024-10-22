@@ -8,7 +8,7 @@ import {AuthContext} from '../../contexts/auth';
 
 import {Link} from 'react-router-dom';
 
-import {FiHome, FiUser, FiSettings} from 'react-icons/fi'
+import {FiHome, FiUser, FiSettings, FiDatabase} from 'react-icons/fi'
 
 export default function Header(){
   const {user} = useContext(AuthContext);
@@ -30,6 +30,10 @@ export default function Header(){
       <Link to="/profile">
         <FiSettings color='#FFF' size={24}/>
         Perfil
+      </Link>
+      <Link to="/bank">
+        <FiDatabase color='#FFF' size={24}/>
+        Banco Chamados
       </Link>
     </div>
   );
