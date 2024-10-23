@@ -81,14 +81,6 @@ export default function DashBoard(){
     setLoadingMore(false);
   }
 
-  // async function handleMore(){
-  //   setLoadingMore(true);
-
-  //   const q = query(listRef, where('status', '==', 'Atendido'), orderBy('created','desc'), startAfter(lastDocs));
-  //   const querySnapshot = await getDocs(q);
-  //   await updateState(querySnapshot);
-  // }
-
   function toggleModal(item){
     setShowPostModal(!showPostModal)
     setDetail(item)
@@ -125,41 +117,33 @@ export default function DashBoard(){
             chamados.length === 0 ? (
               <div className='container dashboard'>
                 <span> Nenhum chamado encontrado...</span>
-                {/* <Link to='/new' className='new'>
-                  <FiPlus color='#FFF' size={25}/>
-                  Novo chamado
-                </Link> */}
               </div>
             ) : (
               <>
-                {/* <Link to='/new' className='new'>
-                  <FiPlus color='#FFF' size={25}/>
-                  Novo chamado
-                </Link> */}
 
                 <div className="select-container">
-                  <label htmlFor="filtro">Filtro</label>
+                  <label htmlFor="filtro">Filtro De Assunto</label>
                   <select id="filtro" value={filter} onChange={(e) => setFilter(e.target.value)}>
-                  <option value="">Sem Filtro</option>
-                    <option value="Manutenção Ar-Condicionado">Manutenção Ar-Condicionado</option>
-                    <option value="Instalação Ar-Condicionado">Instalação Ar-Condicionado</option>
-                    <option value="Manutenção Computador">Manutenção Computador</option>
+                    <option value="">Sem Filtro</option>
                     <option value="Instalação Computador">Instalação Computador</option>
-                    <option value="Configuração Computador">Configuração Computador</option>
-                    <option value="Manutenção Impressora">Manutenção Impressora</option>
+                    <option value="Instalação Ar-Condicionado">Instalação Ar-Condicionado</option>
                     <option value="Instalação Impressora">Instalação Impressora</option>
-                    <option value="Configuração Impressora">Configuração Impressora</option>
-                    <option value="Manutenção Redes">Manutenção Redes</option>
                     <option value="Instalação Redes">Instalação Redes</option>
-                    <option value="Manutenção Televisão">Manutenção Televisão</option>
                     <option value="Instalação Televisão">Instalação Televisão</option>
-                    <option value="Configuração Televisão">Configuração Televisão</option>
-                    <option value="Manutenção Telefonia">Manutenção Telefonia</option>
                     <option value="Instalação Telefonia">Instalação Telefonia</option>
-                    <option value="Manutenção Geladeira">Manutenção Geladeira</option>
                     <option value="Instalação Geladeira">Instalação Geladeira</option>
-                    <option value="Manutenção Micro-ondas">Manutenção Micro-ondas</option>
                     <option value="Instalação Micro-ondas">Instalação Micro-ondas</option>
+                    <option value="Manutenção Ar-Condicionado">Manutenção Ar-Condicionado</option>
+                    <option value="Manutenção Computador">Manutenção Computador</option>
+                    <option value="Manutenção Impressora">Manutenção Impressora</option>
+                    <option value="Manutenção Redes">Manutenção Redes</option>
+                    <option value="Manutenção Televisão">Manutenção Televisão</option>
+                    <option value="Manutenção Telefonia">Manutenção Telefonia</option>
+                    <option value="Manutenção Geladeira">Manutenção Geladeira</option>
+                    <option value="Manutenção Micro-ondas">Manutenção Micro-ondas</option>
+                    <option value="Configuração Computador">Configuração Computador</option>
+                    <option value="Configuração Impressora">Configuração Impressora</option>
+                    <option value="Configuração Televisão">Configuração Televisão</option>
                   </select>
                 </div>
 
@@ -191,9 +175,6 @@ export default function DashBoard(){
                             <button onClick={() => toggleModal(item)} className='action' style={{backgroundColor: '#3583f6'}}>
                               <FiSearch color='#FFF' size={17}/>
                             </button>
-                            {/* <Link to={`/new/${item.id}`} className='action' style={{backgroundColor: '#f6a935'}}>
-                              <FiEdit2 color='#FFF' size={17}/>
-                            </Link> */}
                           </td>
                         </tr>
 
@@ -201,9 +182,6 @@ export default function DashBoard(){
                     })}
                   </tbody>
                 </table>
-
-                {/* {loadingMore && <h3>Buscando mais chamados...</h3>}
-                {!loadingMore && !isEmply && <button className='btn-more' onClick={handleMore}>Buscar mais</button> } */}
                </>
             )
           }

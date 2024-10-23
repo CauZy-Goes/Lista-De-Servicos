@@ -185,32 +185,25 @@ export default function New(){
 
             <label>Assunto</label>
             <select value={assunto} onChange={handleChangeSelect}>
-              <option value="Manutenção Ar-Condicionado">Manutenção Ar-Condicionado</option>
-              <option value="Instalação Ar-Condicionado">Instalação Ar-Condicionado</option>
-
-              <option value="Manutenção Computador">Manutenção Computador</option>
-              <option value="Instalação Computador">Instalação Computador</option>
-              <option value="Configuração Computador">Configuração Computador</option>
-
-              <option value="Manutenção Impressora">Manutenção Impressora</option>
-              <option value="Instalação Impressora">Instalação Impressora</option>
-              <option value="Configuração Impressora">Configuração Impressora</option>
-
-              <option value="Manutenção Redes">Manutenção Redes</option>
-              <option value="Instalação Redes">Instalação Redes</option>
-
-              <option value="Manutenção Televisão">Manutenção Televisão</option>
-              <option value="Instalação Televisão">Instalação Televisão</option>
-              <option value="Configuração Televisão">Configuração Televisão</option>
-
-              <option value="Manutenção Telefonia">Manutenção Telefonia</option>
-              <option value="Instalação Telefonia">Instalação Telefonia</option>
-
-              <option value="Manutenção Geladeira">Manutenção Geladeira</option>
-              <option value="Instalação Geladeira">Instalação Geladeira</option>
-
-              <option value="Manutenção Micro-ondas">Manutenção Micro-ondas</option>
-              <option value="Instalação Micro-ondas">Instalação Micro-ondas</option>
+            <option value="Instalação Computador">Instalação Computador</option>
+                    <option value="Instalação Ar-Condicionado">Instalação Ar-Condicionado</option>
+                    <option value="Instalação Impressora">Instalação Impressora</option>
+                    <option value="Instalação Redes">Instalação Redes</option>
+                    <option value="Instalação Televisão">Instalação Televisão</option>
+                    <option value="Instalação Telefonia">Instalação Telefonia</option>
+                    <option value="Instalação Geladeira">Instalação Geladeira</option>
+                    <option value="Instalação Micro-ondas">Instalação Micro-ondas</option>
+                    <option value="Manutenção Ar-Condicionado">Manutenção Ar-Condicionado</option>
+                    <option value="Manutenção Computador">Manutenção Computador</option>
+                    <option value="Manutenção Impressora">Manutenção Impressora</option>
+                    <option value="Manutenção Redes">Manutenção Redes</option>
+                    <option value="Manutenção Televisão">Manutenção Televisão</option>
+                    <option value="Manutenção Telefonia">Manutenção Telefonia</option>
+                    <option value="Manutenção Geladeira">Manutenção Geladeira</option>
+                    <option value="Manutenção Micro-ondas">Manutenção Micro-ondas</option>
+                    <option value="Configuração Computador">Configuração Computador</option>
+                    <option value="Configuração Impressora">Configuração Impressora</option>
+                    <option value="Configuração Televisão">Configuração Televisão</option>
             </select>
 
             <label>Status</label>
